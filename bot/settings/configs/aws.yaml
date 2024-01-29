@@ -1,0 +1,43 @@
+crypto:
+  jwt_secret: ${oc.env:JWT_SECRET}
+  google_client_id: ${oc.env:GOOGLE_CLIENT_ID}
+database:
+  kind: postgres
+  generate_schemas: false
+  postgres:
+    read_host: ${oc.env:DB_READ_HOST}
+    write_host: ${oc.env:DB_WRITE_HOST}
+    port: ${oc.decode:${oc.env:DB_PORT,5432}}
+    username: ${oc.env:DB_USERNAME}
+    password: ${oc.env:DB_PASSWORD}
+email:
+  host: ${oc.env:SMTP_HOST}
+  port: 587
+  name: Ben
+  email: ${oc.env:SMTP_EMAIL}
+  password: ${oc.env:SMTP_PASSWORD}
+file:
+  fs_type: s3
+  s3:
+    bucket: ${oc.env:S3_BUCKET}
+    subfolder: audio_uploads
+model:
+  # Where the model weights are cached inside the Docker image.
+  hf_hub_token: ${oc.env:HF_HUB_TOKEN}
+  cache_dir: ~/models
+  key: hubert-quantized-20231016
+site:
+  homepage: ${oc.env:SITE_HOMEPAGE}
+user:
+  # Warning: These users can change content visibility!
+  admin_emails:
+    - "test@example.com"
+  # For soft rollout, these users will be automatically approved, other users
+  # will be waitlisted until an admin approves them. If this is removed, then
+  # any user can sign up without being waitlisted.
+  authorized_users: []
+worker:
+  # host: "172.31.85.223"
+  host: ${oc.env:WORKER_HOST}
+  port: 8000
+  sampling_timesteps: 50

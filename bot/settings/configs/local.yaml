@@ -1,0 +1,34 @@
+crypto:
+  jwt_secret: ${oc.env:JWT_SECRET}
+  google_client_id: ${oc.env:GOOGLE_CLIENT_ID}
+database:
+  kind: sqlite
+  generate_schemas: true
+  sqlite:
+    # host: ":memory:"
+    host: "${oc.env:DATA_DIR}/bot/db.sqlite"
+email:
+  host: ${oc.env:SMTP_HOST}
+  port: 587
+  name: Me
+  email: ${oc.env:SMTP_EMAIL}
+  password: ${oc.env:SMTP_PASSWORD}
+file:
+  fs_type: file
+  local:
+    root_dir: ${oc.env:DATA_DIR}/bot/samples
+site:
+  homepage: http://localhost:3000
+user:
+  admin_emails:
+    - test@example.com
+  authorized_users: ${user.admin_emails}
+worker:
+  host: localhost
+  port: 8080
+  sampling_timesteps: 50
+model:
+  key: hubert-quantized-20231016
+# Setting this flag to make some debugging things easier, but it is a good
+# idea to avoid using it too often.
+debug: true
