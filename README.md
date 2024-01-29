@@ -16,12 +16,11 @@ Build a local config file:
 python configs/build.py local ~/.config/bot.yaml
 ```
 
-Start the frontend, backend and worker processes:
+Start the frontend and backend processes:
 
 ```bash
 make start-frontend
 make start-backend
-make start-worker
 ```
 
 ## Infrastructure
